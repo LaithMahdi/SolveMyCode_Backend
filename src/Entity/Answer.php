@@ -2,13 +2,28 @@
 
 namespace App\Entity;
 
+use App\Entity\Comment;
+use App\Entity\Question;
+use ApiPlatform\Metadata\Link;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\AnswerRepository;
 use ApiPlatform\Metadata\ApiResource;
-
-#[ORM\Entity(repositoryClass: AnswerRepository::class)]
+use ApiPlatform\Metadata\GetCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 #[ApiResource]
+#[ApiResource(
+    uriTemplate: '/questions/{id}/answers', 
+    uriVariables: [
+        'id' => new Link(
+            fromClass: Question::class,
+            fromProperty: 'answers'
+        )
+    ], 
+    operations: [new GetCollection()]
+)]
+#[ORM\Entity(repositoryClass: AnswerRepository::class)]
 class Answer
 {
     #[ORM\Id]
