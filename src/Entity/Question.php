@@ -2,15 +2,23 @@
 
 namespace App\Entity;
 
+use App\Entity\Answer;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\QuestionRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use ApiPlatform\Doctrine\Odm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    paginationItemsPerPage: 4,
+    paginationClientItemsPerPage: true,
+    paginationMaximumItemsPerPage:4
+)]
+// #[ApiFilter(SearchFilter::class, properties: ['id' => 'exact', 'title' => 'partial'])]
 class Question
 {
     #[ORM\Id]
