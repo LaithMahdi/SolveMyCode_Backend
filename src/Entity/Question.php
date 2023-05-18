@@ -5,12 +5,10 @@ namespace App\Entity;
 use App\Entity\Answer;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\QuestionRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use ApiPlatform\Doctrine\Odm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
 #[ApiResource(
@@ -29,7 +27,7 @@ class Question
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
     #[ORM\Column(type: Types::DATETIMETZ_MUTABLE)]
@@ -87,8 +85,6 @@ class Question
     /**
      * @return Collection<int, Answer>
      */
-    
-
     public function getAnswers(): Collection
     {
         return $this->answers;

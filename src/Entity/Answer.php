@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Entity\Comment;
 use App\Entity\Question;
 use ApiPlatform\Metadata\Link;
 use Doctrine\DBAL\Types\Types;
@@ -10,8 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\AnswerRepository;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
+
+#[ORM\Entity(repositoryClass: AnswerRepository::class)]
 #[ApiResource]
 #[ApiResource(
     uriTemplate: '/questions/{id}/answers', 
@@ -23,7 +22,6 @@ use Doctrine\Common\Collections\ArrayCollection;
     ], 
     operations: [new GetCollection()]
 )]
-#[ORM\Entity(repositoryClass: AnswerRepository::class)]
 class Answer
 {
     #[ORM\Id]
@@ -31,7 +29,7 @@ class Answer
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
     #[ORM\Column(type: Types::DATETIMETZ_MUTABLE)]
