@@ -12,9 +12,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
 #[ApiResource(
-    paginationItemsPerPage: 4,
+    // paginationItemsPerPage: 6,
     paginationClientItemsPerPage: true,
-    paginationMaximumItemsPerPage:4
+    paginationMaximumItemsPerPage:6
 )]
 // #[ApiFilter(SearchFilter::class, properties: ['id' => 'exact', 'title' => 'partial'])]
 class Question
